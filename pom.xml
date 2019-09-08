@@ -19,6 +19,7 @@
         <module>../AstronomDesigner</module>
         <module>../AstronomSimulator</module>
         <module>../AstronomAgent</module>
+        <module>../FunctionalRepositoryService</module>
         <module>Examples</module>
     </modules>
 
