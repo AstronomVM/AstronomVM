@@ -5,23 +5,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.astronomvm</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>AstronomVM</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
     <modules>
-        <module>../AstronomCore</module>
-        <module>../AstronomComponents</module>
-        <module>../AstronomKernel</module>
-        <module>../AstronomDesigner</module>
-        <module>../AstronomSimulator</module>
-        <module>../AstronomAgent</module>
-        <module>../FunctionalRepositoryService</module>
+        <module>AstronomComponents/AstronomComponent</module>
+        <module>AstronomKernel</module>
+        <module>AstronomCore</module>
+        <module>AstronomComponents/CSVFileLoaderComponent</module>
+        <module>AstonomDesigner</module>
+        <module>AstronomComponents/RowFilterComponent</module>
+        <module>AstronomComponents/TextFileOutputComponent</module>
+        <module>AstronomSimulator</module>
+        <module>AstronomAgent</module>
+        <module>AstronomComponents/FunctionalModelMapperComponent</module>
         <module>Examples</module>
+        <module>FunctionalRepositoryService</module>
+        <module>AstronomComponents/SQLExecutorComponent</module>
+        <module>AstronomComponents/RestConsumerComponent</module>
+        <module>AstronomComponents/JsonPathSelectorComponent</module>
+        <module>AstronomComponents/JsonToModelComponent</module>
     </modules>
 
     <dependencies>
@@ -50,42 +57,8 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-
-
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.5.1</version>
-                <executions>
-                    <execution>
-                        <id>default-deploy</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-            </plugin>
         </plugins>
-
     </build>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
 
 
 </project>

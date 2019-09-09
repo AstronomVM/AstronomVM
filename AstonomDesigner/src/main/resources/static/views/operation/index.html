@@ -1,0 +1,143 @@
+<div class='row'>
+	<div class="col-md-2">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						<b>{{selectedOperation.name}} Steps</b>
+						<div class="clearfix"></div>
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+					  	<ul class="list-group list-group-flush">
+							<li class="list-group-item small" 
+								ng-repeat="step in selectedOperation.steps"
+								ng-click="selectStepFromList(step)">
+								{{step.name}}
+
+							</li>
+					  	</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white" ng-show="selectedStep">
+					<div class="card-header">
+						<b>Step Parameters</b>
+					</div>
+					<div class="card-body bg-white text-dark">
+						<div class="form-group">
+							<label>Step Name</label>
+							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.name" placeholder="Step Name">
+						</div>
+						<div class="form-group"
+							 ng-repeat="(i,parameterMeta) in getComponentMeta(selectedStep.componentName).parameterMetas track by $index">
+							<label>{{parameterMeta.name}}</label>
+							<input type="text" class="form-control form-control-sm" ng-model="selectedStep.parametersValues[i].value" placeholder="{{parameterMeta.name}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white" ng-show="selectedTransition">
+					<div class="card-header">
+						<b>Transition Parameters</b>
+					</div>
+					<div class="card-body bg-white text-dark">
+						<p>From <b><{{selectedTransition.fromStep.name}}></b></p>
+						<p>To <b><{{selectedTransition.toStep.name}}></b></p>
+						<div class="form-group">
+							<input type="checkbox" ng-model="selectedTransition.isErrorTransition"/>Error transition
+						</div>
+
+						<div class="form-group">
+							<label>Source Flow Name</label>
+							<input type="text" ng-model="selectedTransition.sourceFlowName" class="form-control" placeholder="Source Flow Name">
+						</div>
+
+						<div class="form-group">
+							<label>Target Flow Name</label>
+							<input type="text" ng-model="selectedTransition.targetFlowName" class="form-control" placeholder="Target Flow Name">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<div class="col-md-8">
+		<div class="card bg-dark text-white">
+			<div class="card-header">
+				<b>{{selectedOperation.name}} Workflow</b>
+				<div class="pull-right">
+					<button class="btn btn-success btn-sm" ng-click="connectSteps()">Connect</button>
+					<button class="btn btn-success btn-sm" ng-click="exportOperation()">Export Operation</button>
+					<button class="btn btn-success btn-sm" ng-click="executeOperation()">Execute</button>
+					<button class="btn btn-success btn-sm" ng-click="saveProject()">Save Project</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="card-body bg-white text-dark" style="padding: 0px;">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="canvas" class="bg-white"></div>
+					</div>
+					<div class="col-md-12">
+						<textarea class="form-control" ng-model="logs"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-2">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						<b>Astronom Components</b>
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+					  	<ul class="list-group list-group-flush">
+							<li class="list-group-item small" 
+								ng-repeat="componentMeta in componentsMeta">
+								{{componentMeta.name}}
+								<div class="pull-right">
+									<i class="icon-button fas fa-plus-square text-success" ng-click="addComponent(componentMeta)"></i>
+								</div>
+							</li>
+					  	</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-12">
+				<div class="card bg-dark text-white">
+					<div class="card-header">
+						<b>Available Simulators</b>
+					</div>
+					<div class="card-body bg-white text-dark" style="padding: 0px;">
+					  	<ul class="list-group list-group-flush">
+							<li class="list-group-item small" 
+								ng-repeat="simulator in simulators" 
+								ng-model="selectedSimulator" 
+								ng-click="simulatorSelectionChanged()"
+								ng-class="simulator == selectedSimulator?'list-group-item-success':''">
+								{{simulator.name}}
+							</li>
+					  	</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
