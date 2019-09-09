@@ -4,3 +4,4 @@ Examples/target/**
 target/**
 **/target/**
 logs/
+*.iml
